@@ -1,11 +1,20 @@
 import './App.css'
-import EmojiList from './EmojiList'
+import { useState } from 'react';
+import EmojiList from './EmojiList';
+import SearchForm from './SearchForm';
 
 function App() {
+  const [query, setQuery] = useState('');
 
   return (
     <>
-      <EmojiList />
+      <SearchForm
+        query={query}
+        setQuery={setQuery} 
+      />
+      <EmojiList 
+        query={query}
+      />
     </>
   )
 }
