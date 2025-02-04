@@ -1,11 +1,6 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-export default function SearchForm() {
-    const [query, setQuery] = useState('');
-
-    const handleSearch = (e) => {
-        setQuery(e.target.value);
-    };
+export default function SearchForm({ query, setQuery }) {
 
     return (
         <form>
@@ -15,9 +10,13 @@ export default function SearchForm() {
                 id="query" 
                 name="query"
                 value={query} 
-                onChange={handleSearch}
+                onChange={(e) => setQuery(e.target.value)}
             />
         </form>
     )   
 }
 
+SearchForm.propTypes = {
+    query: PropTypes.string.isRequired,
+    setQuery: PropTypes.func.isRequired,
+};
