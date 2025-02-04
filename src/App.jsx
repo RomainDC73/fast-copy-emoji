@@ -25,6 +25,12 @@ export default function App() {
     };
   }, []);
 
+  useEffect(() => {
+    if (query === "") {
+      setShowSearch(false);;
+    }
+  }, [query]);
+
   return (
     <div style={{ position: "relative", textAlign: "center", padding: "20px" }}>
       <h1>Fire Emojis</h1>
