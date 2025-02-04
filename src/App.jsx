@@ -11,7 +11,7 @@ export default function App() {
       if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
         // Si l'utilisateur tape une lettre ou un chiffre, afficher le champ de recherche
         setShowSearch(true);
-        setQuery((prev) => prev + event.key);
+        setQuery((prev) => prev);
       } else if (event.key === "Escape") {
         // Si l'utilisateur appuie sur Échap, cacher le champ de recherche
         setShowSearch(false);
@@ -27,7 +27,7 @@ export default function App() {
 
   return (
     <div style={{ position: "relative", textAlign: "center", padding: "20px" }}>
-      <h1>🔍 Rechercher un emoji</h1>
+      <h1>Fire Emojis</h1>
 
       {showSearch && (
         <div style={overlayStyle}>
