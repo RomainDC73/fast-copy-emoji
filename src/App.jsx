@@ -32,19 +32,22 @@ export default function App() {
   }, [query]);
 
   return (
-    <div style={{ position: "relative", textAlign: "center", padding: "20px" }}>
+    <div>
+    <div>
       <h1>Fast Copy Emojis</h1>
-      <p>Start typing to filter emojis.<br />
-      Click on the emoji to copy.<br />
-      Simple as that...</p>
-
-      {showSearch && (
+      <p>⌨️ Start typing to filter emojis. 👉 Click on the emoji to copy. 👇 Paste it wherever you want.<br />
+      😘 Easy.</p>
+    </div>
+    <div>
+    {showSearch && (
         <div style={overlayStyle}>
           <SearchForm query={query} setQuery={setQuery} />
         </div>
       )}
 
       <EmojiList query={query} />
+    </div>
+
     </div>
   );
 }

@@ -46,13 +46,11 @@ export default function EmojiList({ query }) {
         <div>
         {isLoading && <p>Loading Emojis...</p>}
         {error && <p>Something went wrong: {error.message}</p>}
-        <ul>
             {filteredEmojis.map((emoji) => (
-                <li key={emoji.slug}>
+                <button key={emoji.slug}>
                     {emoji.character}
-                </li>
+                </button>
             ))}
-        </ul>
         </div>
 )};
 
