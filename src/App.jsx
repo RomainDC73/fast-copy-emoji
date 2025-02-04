@@ -33,7 +33,10 @@ export default function App() {
 
   return (
     <div style={{ position: "relative", textAlign: "center", padding: "20px" }}>
-      <h1>Fire Emojis</h1>
+      <h1>Fast Copy Emojis</h1>
+      <p>Start typing to filter emojis.<br />
+      Click on the emoji to copy.<br />
+      Simple as that...</p>
 
       {showSearch && (
         <div style={overlayStyle}>
