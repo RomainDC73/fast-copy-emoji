@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import PropTypes from 'prop-types';
 
 export default function EmojiList({ query }) {
@@ -44,7 +45,15 @@ export default function EmojiList({ query }) {
 
     return (
         <div>
-        {isLoading && <p>Loading Emojis...</p>}
+        {isLoading && 
+            <RotatingLines
+              strokeColor="grey"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="20"
+              visible={isLoading}
+            />
+        }         
         {error && <p>Something went wrong: {error.message}</p>}
             {filteredEmojis.map((emoji) => (
                 <button key={emoji.slug}>
