@@ -42,7 +42,7 @@ export default function App() {
 
   return (
     <div>
-    <div>
+    <div className="header">
       <h1>Fast Copy Emojis</h1>
       <p>⌨️ Start typing to filter emojis. 👉 Click on the emoji to copy. 👇 Paste it wherever you want.<br />
       😘 Easy.</p>

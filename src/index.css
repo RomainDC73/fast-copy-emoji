@@ -28,6 +28,10 @@ body {
   min-height: 100vh;
 }
 
+.header {
+  padding: 0 4em 1em 4em;
+}
+
 h1 {
   font-size: 2.5em;
   line-height: 1.1;
@@ -43,7 +47,6 @@ ul {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 10px;
 }
 
 button {
@@ -51,8 +54,20 @@ button {
   border: none
 }
 
+button:hover {
+  cursor: pointer;
+  background-color: #5D8383;
+  border-radius: 5px;
+}
+
 .emoji {
   font-size: 2em;
+}
+
+.emojiList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4em; 
 }
 
 .overlayForm {
@@ -79,7 +94,6 @@ button {
   text-align: center;
   border: none
 }
-
 
 @media (prefers-color-scheme: light) {
   :root {

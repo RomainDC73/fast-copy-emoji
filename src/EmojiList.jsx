@@ -44,7 +44,7 @@ export default function EmojiList({ query }) {
         : emojis;
 
     return (
-        <div>
+        <div className="emojiList">
         {isLoading && 
             <RotatingLines
               strokeColor="white"
