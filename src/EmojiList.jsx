@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
+import PropTypes from 'prop-types';
 
-export default function EmojiList() {
+export default function EmojiList({ query }) {
     const [emojis, setEmojis] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -17,14 +18,14 @@ export default function EmojiList() {
                 const response = await fetch(url);
                 const data = await response.json();
 
-                if (ignore === false) {
+                if (!ignore) {
                     setEmojis(data);
                     setError(null);
                     setIsLoading(false);
                 }
             } catch (error) {
-                if (ignore === false) {
-                    setEmojis(null);
+                if (!ignore) {
+                    setEmojis([]);
                     setError(error);
                     setIsLoading(false);
             }
@@ -36,18 +37,24 @@ export default function EmojiList() {
         ignore = true
     }
 }, []);
+    
+    const filteredEmojis = query 
+        ? emojis.filter((emoji) => emoji.unicodeName.toLowerCase().includes(query.toLowerCase()))
+        : emojis;
 
     return (
         <div>
-        This is the EmojiList component.
-        Je fais des tests.
-        <ul>
-            {emojis.map((emoji) => (
-            <li key={emoji.slug}>
-                {emoji.character}
-            </li>
+        {isLoading && <p>Loading Emojis...</p>}
+        {error && <p>Something went wrong: {error.message}</p>}
+            {filteredEmojis.map((emoji) => (
+                <button key={emoji.slug}>
+                    {emoji.character}
+                </button>
             ))}
-        </ul>
         </div>
-    )
+)};
+
+EmojiList.propTypes = {
+    query: PropTypes.string.isRequired,
 };
+
