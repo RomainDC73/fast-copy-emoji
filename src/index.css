@@ -5,7 +5,8 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #466365;
+  background-color: #111818;
+  background: linear-gradient(300deg, rgba(17,24,24,1) 30%, rgba(42,59,60,1) 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -48,7 +49,14 @@ ul {
   gap: 10px;
 }
 
+button {
+  background-color: transparent;
+  border: none
+}
 
+.emoji {
+  font-size: 2em;
+}
 
 .overlayForm {
   position: absolute;

@@ -44,7 +44,6 @@ export default function App() {
           <SearchForm query={query} setQuery={setQuery} />
         </div>
       )}
-
       <EmojiList query={query} />
     </div>
 

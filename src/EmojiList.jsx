@@ -47,7 +47,7 @@ export default function EmojiList({ query }) {
         <div>
         {isLoading && 
             <RotatingLines
-              strokeColor="grey"
+              strokeColor="white"
               strokeWidth="5"
               animationDuration="0.75"
               width="20"
@@ -56,7 +56,9 @@ export default function EmojiList({ query }) {
         }         
         {error && <p>Something went wrong: {error.message}</p>}
             {filteredEmojis.map((emoji) => (
-                <button key={emoji.slug}>
+                <button 
+                    key={emoji.slug}
+                    className="emoji">
                     {emoji.character}
                 </button>
             ))}
