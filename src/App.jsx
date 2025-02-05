@@ -40,7 +40,7 @@ export default function App() {
     </div>
     <div>
     {showSearch && (
-        <div style={overlayStyle}>
+        <div className="overlayForm">
           <SearchForm query={query} setQuery={setQuery} />
         </div>
       )}
@@ -52,14 +52,3 @@ export default function App() {
   );
 }
 
-const overlayStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  background: "rgba(255, 255, 255, 0.9)",
-  padding: "20px",
-  borderRadius: "10px",
-  boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)",
-  zIndex: 10,
-};
