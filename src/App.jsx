@@ -31,6 +31,15 @@ export default function App() {
     }
   }, [query]);
 
+  useEffect(() => {
+    if (query !== "") {
+      document.body.style.background = "linear-gradient(60deg, rgba(17,24,24,1) 30%, rgba(42,59,60,1) 100%)";
+    } else {
+      document.body.style.background = "linear-gradient(300deg, rgba(17,24,24,1) 30%, rgba(42,59,60,1) 100%)";
+    }
+  }, [query]);
+
+
   return (
     <div>
     <div>
