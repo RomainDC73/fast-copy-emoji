@@ -31,9 +31,18 @@ export default function App() {
     }
   }, [query]);
 
+  useEffect(() => {
+    if (query !== "") {
+      document.body.style.background = "linear-gradient(60deg, rgba(17,24,24,1) 30%, rgba(42,59,60,1) 100%)";
+    } else {
+      document.body.style.background = "linear-gradient(300deg, rgba(17,24,24,1) 30%, rgba(42,59,60,1) 100%)";
+    }
+  }, [query]);
+
+
   return (
     <div>
-    <div>
+    <div className="header">
       <h1>Fast Copy Emojis</h1>
       <p>⌨️ Start typing to filter emojis. 👉 Click on the emoji to copy. 👇 Paste it wherever you want.<br />
       😘 Easy.</p>
@@ -44,7 +53,6 @@ export default function App() {
           <SearchForm query={query} setQuery={setQuery} />
         </div>
       )}
-
       <EmojiList query={query} />
     </div>
 

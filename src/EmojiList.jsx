@@ -1,10 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import PropTypes from 'prop-types';
 
 export default function EmojiList({ query }) {
     const [emojis, setEmojis] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [copiedEmoji, setCopiedEmoji] = useState(null);
+
     const API_KEY = "14d0ee6eebe21bf0c2799ab1e12109e6387b97d7";
 
     useEffect(() => {
@@ -36,18 +39,47 @@ export default function EmojiList({ query }) {
     return () => {
         ignore = true
     }
-}, []);
+    }, []);
+
+    const handleCopy = (emoji) => {
+        navigator.clipboard.writeText(emoji);
+        setCopiedEmoji(emoji);
+
+        let times = 0;
+        const interval = setInterval(() => {
+            setCopiedEmoji((prev) => (prev === emoji ? null : emoji));
+            times++;
+            if (times >= 4) {
+                clearInterval(interval);
+                setTimeout(() => setCopiedEmoji(null), 100);
+            }
+        }, 100);
+    };
     
     const filteredEmojis = query 
         ? emojis.filter((emoji) => emoji.unicodeName.toLowerCase().includes(query.toLowerCase()))
         : emojis;
 
     return (
-        <div>
-        {isLoading && <p>Loading Emojis...</p>}
+        <div className="emojiList">
+        {isLoading && 
+            <RotatingLines
+              strokeColor="white"
+              strokeWidth="5"
+              animationDuration="0.75"
+              width="20"
+              visible={isLoading}
+            />
+        }         
         {error && <p>Something went wrong: {error.message}</p>}
             {filteredEmojis.map((emoji) => (
-                <button key={emoji.slug}>
+                <button 
+                    key={emoji.slug}
+                    className={`emoji ${copiedEmoji === emoji.character ? "copied" : ""}`}
+                    onClick={() => {
+                        handleCopy(emoji.character);
+                        }}
+                >
                     {emoji.character}
                 </button>
             ))}

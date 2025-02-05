@@ -5,8 +5,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #466365;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,6 +28,10 @@ body {
   min-height: 100vh;
 }
 
+.header {
+  padding: 0 8em 1em 8em;
+}
+
 h1 {
   font-size: 2.5em;
   line-height: 1.1;
@@ -45,10 +47,43 @@ ul {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 10px;
+}
+
+button {
+  background-color: transparent;
+  border: none
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #5D8383;
+  border-radius: 5px;
 }
 
 
+.emoji {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.emoji:hover {
+  cursor: pointer;
+  background-color: #5D8383;
+  border-radius: 5px;
+}
+
+.emoji.copied {
+  background-color: #ffffff;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.emojiList {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 8em; 
+}
 
 .overlayForm {
   position: absolute;
@@ -74,7 +109,6 @@ ul {
   text-align: center;
   border: none
 }
-
 
 @media (prefers-color-scheme: light) {
   :root {
