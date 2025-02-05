@@ -6,6 +6,8 @@ export default function EmojiList({ query }) {
     const [emojis, setEmojis] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [copiedEmoji, setCopiedEmoji] = useState(null);
+
     const API_KEY = "14d0ee6eebe21bf0c2799ab1e12109e6387b97d7";
 
     useEffect(() => {
@@ -37,7 +39,22 @@ export default function EmojiList({ query }) {
     return () => {
         ignore = true
     }
-}, []);
+    }, []);
+
+    const handleCopy = (emoji) => {
+        navigator.clipboard.writeText(emoji);
+        setCopiedEmoji(emoji);
+
+        let times = 0;
+        const interval = setInterval(() => {
+            setCopiedEmoji((prev) => (prev === emoji ? null : emoji));
+            times++;
+            if (times >= 4) {
+                clearInterval(interval);
+                setTimeout(() => setCopiedEmoji(null), 100);
+            }
+        }, 100);
+    };
     
     const filteredEmojis = query 
         ? emojis.filter((emoji) => emoji.unicodeName.toLowerCase().includes(query.toLowerCase()))
@@ -58,7 +75,11 @@ export default function EmojiList({ query }) {
             {filteredEmojis.map((emoji) => (
                 <button 
                     key={emoji.slug}
-                    className="emoji">
+                    className={`emoji ${copiedEmoji === emoji.character ? "copied" : ""}`}
+                    onClick={() => {
+                        handleCopy(emoji.character);
+                        }}
+                >
                     {emoji.character}
                 </button>
             ))}
