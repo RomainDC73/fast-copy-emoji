@@ -123,4 +123,20 @@ button:hover {
   }
 }
 
+@media screen and (max-width: 768px) {
+  
+  .emojiList {
+    padding: 0 0.5em;
+    justify-content: center;
+  }
+
+  .header {
+    padding: 0 1em;
+  }
+  
+  h1 {
+    font-size: 1.8em;
+  }
+}
+
 
