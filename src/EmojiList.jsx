@@ -57,7 +57,10 @@ export default function EmojiList({ query }) {
     };
     
     const filteredEmojis = query 
-        ? emojis.filter((emoji) => emoji.unicodeName.toLowerCase().includes(query.toLowerCase()))
+        ? emojis.filter((emoji) => 
+            [emoji.unicodeName, emoji.slug, emoji.group, emoji.subGroup]
+                .some((field) => field?.toLowerCase().includes(query.toLowerCase()))
+        )
         : emojis;
 
     return (
