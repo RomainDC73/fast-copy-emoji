@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import SearchForm from "./SearchForm";
 import EmojiList from "./EmojiList";
+import Footer from "./Footer";
 
 export default function App() {
   const [query, setQuery] = useState("");
@@ -41,7 +42,7 @@ export default function App() {
 
 
   return (
-    <div>
+    <div className="app-container">
     <div className="header">
       <h1>Fast Copy Emojis</h1>
       <h2>🚀 Search, copy and paste emojis quickly</h2>
@@ -55,8 +56,9 @@ export default function App() {
         </div>
       )}
       <EmojiList query={query} />
-    </div>
 
+    </div>
+    <Footer />
     </div>
   );
 }
