@@ -44,6 +44,7 @@ export default function App() {
     <div>
     <div className="header">
       <h1>Fast Copy Emojis</h1>
+      <h2>🚀 Search, copy and paste emojis quickly</h2>
       <p>⌨️ Start typing to filter emojis. 👉 Click on the emoji to copy. 👇 Paste it wherever you want.<br />
       😘 Easy.</p>
     </div>
