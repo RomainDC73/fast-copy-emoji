@@ -10,11 +10,9 @@ export default function App() {
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.key.length === 1 && !event.ctrlKey && !event.metaKey) {
-        // Si l'utilisateur tape une lettre ou un chiffre, afficher le champ de recherche
         setShowSearch(true);
         setQuery((prev) => prev);
       } else if (event.key === "Escape") {
-        // Si l'utilisateur appuie sur Échap, cacher le champ de recherche
         setShowSearch(false);
         setQuery("");
       }

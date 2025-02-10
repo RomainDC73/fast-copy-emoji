@@ -13,7 +13,7 @@
 }
 
 .app-container {
-  flex: 1; /* Permet d'occuper tout l'espace disponible */
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -28,7 +28,6 @@ a:hover {
 }
 
 body {
-  /* margin: 0.5em; */
   display: flex;
   flex-direction: column;
   min-width: 320px;
@@ -75,7 +74,7 @@ footer {
   text-align: center;
   padding: 0.1em;
   font-size: 0.9rem;
-  margin-top: 2em
+  margin-top: 8em
 }
 
 
