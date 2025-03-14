@@ -12,15 +12,25 @@ export default function EmojiList({ query }) {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            const url = `https://www.emoji.family/api/emojis`;
+            // Utilisation de l'URL du proxy configuré dans vite.config.js
+            const url = '/api/api/emojis';
             setIsLoading(true);
 
             try {
-                const response = await fetch(url, { mode: "cors" });
+                const response = await fetch(url);
                 const data = await response.json();
+                console.log(data);
 
                 if (!ignore) {
-                    setEmojis(data);
+                    // Adaptez la structure des données si nécessaire
+                    const formattedEmojis = data.map((emoji) => ({
+                        slug: emoji.unicodeName || emoji.annotation,
+                        character: emoji.character,
+                        unicodeName: emoji.unicodeName || emoji.annotation,
+                        group: emoji.group,
+                        subGroup: emoji.subGroup,
+                    }));
+                    setEmojis(formattedEmojis);
                     setError(null);
                     setIsLoading(false);
                 }
@@ -31,12 +41,13 @@ export default function EmojiList({ query }) {
                     setIsLoading(false);
                 }
             }
-        } 
+        };
+
         fetchEmoji();
 
         return () => {
             ignore = true;
-        }
+        };
     }, []);
 
     const handleCopy = (emoji) => {
@@ -56,37 +67,37 @@ export default function EmojiList({ query }) {
     
     const filteredEmojis = query 
         ? emojis.filter((emoji) => 
-            [emoji.name, emoji.category, emoji.group]
+            [emoji.unicodeName, emoji.slug, emoji.group, emoji.subGroup]
                 .some((field) => field?.toLowerCase().includes(query.toLowerCase()))
         )
         : emojis;
 
     return (
         <div className="emojiList">
-        {isLoading && 
-            <RotatingLines
-              strokeColor="white"
-              strokeWidth="5"
-              animationDuration="0.75"
-              width="20"
-              visible={isLoading}
-            />
-        }         
-        {error && <p>Something went wrong: {error.message}</p>}
+            {isLoading && 
+                <RotatingLines
+                  strokeColor="white"
+                  strokeWidth="5"
+                  animationDuration="0.75"
+                  width="20"
+                  visible={isLoading}
+                />
+            }         
+            {error && <p>Something went wrong: {error.message}</p>}
             {filteredEmojis.map((emoji) => (
                 <button 
-                    key={emoji.unicode}
-                    className={`emoji ${copiedEmoji === emoji.emoji ? "copied" : ""}`}
+                    key={emoji.slug}
+                    className={`emoji ${copiedEmoji === emoji.character ? "copied" : ""}`}
                     onClick={() => {
-                        handleCopy(emoji.emoji);
+                        handleCopy(emoji.character);
                     }}
                 >
-                    {emoji.emoji}
+                    {emoji.character}
                 </button>
             ))}
         </div>
     );
-};
+}
 
 EmojiList.propTypes = {
     query: PropTypes.string.isRequired,
