@@ -12,7 +12,7 @@ export default function EmojiList({ query }) {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            const url = "https://www.emoji.family/api/emojis";
+            const url = `https://corsproxy.io/?https://www.emoji.family/api/emojis`;
             setIsLoading(true);
 
             try {
