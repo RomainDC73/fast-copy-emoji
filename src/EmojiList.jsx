@@ -12,23 +12,19 @@ export default function EmojiList({ query }) {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            // Utilisation de l'URL du proxy configuré dans vite.config.js
             const url = '/api/api/emojis';
             setIsLoading(true);
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                console.log(data);
 
                 if (!ignore) {
-                    // Adaptez la structure des données si nécessaire
                     const formattedEmojis = data.map((emoji) => ({
-                        slug: emoji.unicodeName || emoji.annotation,
-                        character: emoji.character,
-                        unicodeName: emoji.unicodeName || emoji.annotation,
+                        slug: emoji.annotation,
+                        character: emoji.emoji,
                         group: emoji.group,
-                        subGroup: emoji.subGroup,
+                        subGroup: emoji.subgroup,
                     }));
                     setEmojis(formattedEmojis);
                     setError(null);
@@ -67,7 +63,7 @@ export default function EmojiList({ query }) {
     
     const filteredEmojis = query 
         ? emojis.filter((emoji) => 
-            [emoji.unicodeName, emoji.slug, emoji.group, emoji.subGroup]
+            [emoji.slug, emoji.group, emoji.subgroup]
                 .some((field) => field?.toLowerCase().includes(query.toLowerCase()))
         )
         : emojis;
