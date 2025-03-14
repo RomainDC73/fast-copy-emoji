@@ -12,8 +12,9 @@ export default function EmojiList({ query }) {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            const url = `${import.meta.env.VITE_API_URL}/emojis`;
-            setIsLoading(true);
+            const url = import.meta.env.PROD
+            ? 'https://fast-copy-emoji.vercel.app/api/proxy'
+            : '/api/emojis';
 
             try {
                 const response = await fetch(url);
