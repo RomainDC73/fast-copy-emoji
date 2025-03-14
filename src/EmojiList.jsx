@@ -8,17 +8,15 @@ export default function EmojiList({ query }) {
     const [error, setError] = useState(null);
     const [copiedEmoji, setCopiedEmoji] = useState(null);
 
-    const API_KEY = "14d0ee6eebe21bf0c2799ab1e12109e6387b97d7";
-
     useEffect(() => {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            const url = `https://emoji-api.com/emojis?access_key=${API_KEY}`
+            const url = `https://corsproxy.io/?https://www.emoji.family/api/emojis`;
             setIsLoading(true);
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(url, { mode: "cors" });
                 const data = await response.json();
 
                 if (!ignore) {
@@ -31,14 +29,14 @@ export default function EmojiList({ query }) {
                     setEmojis([]);
                     setError(error);
                     setIsLoading(false);
+                }
             }
         } 
-    }
-    fetchEmoji();
+        fetchEmoji();
 
-    return () => {
-        ignore = true
-    }
+        return () => {
+            ignore = true;
+        }
     }, []);
 
     const handleCopy = (emoji) => {
@@ -58,7 +56,7 @@ export default function EmojiList({ query }) {
     
     const filteredEmojis = query 
         ? emojis.filter((emoji) => 
-            [emoji.unicodeName, emoji.slug, emoji.group, emoji.subGroup]
+            [emoji.name, emoji.category, emoji.group]
                 .some((field) => field?.toLowerCase().includes(query.toLowerCase()))
         )
         : emojis;
@@ -77,19 +75,19 @@ export default function EmojiList({ query }) {
         {error && <p>Something went wrong: {error.message}</p>}
             {filteredEmojis.map((emoji) => (
                 <button 
-                    key={emoji.slug}
-                    className={`emoji ${copiedEmoji === emoji.character ? "copied" : ""}`}
+                    key={emoji.unicode}
+                    className={`emoji ${copiedEmoji === emoji.emoji ? "copied" : ""}`}
                     onClick={() => {
-                        handleCopy(emoji.character);
-                        }}
+                        handleCopy(emoji.emoji);
+                    }}
                 >
-                    {emoji.character}
+                    {emoji.emoji}
                 </button>
             ))}
         </div>
-)};
+    );
+};
 
 EmojiList.propTypes = {
     query: PropTypes.string.isRequired,
 };
-
