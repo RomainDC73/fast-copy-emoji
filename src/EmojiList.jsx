@@ -12,7 +12,7 @@ export default function EmojiList({ query }) {
         let ignore = false;
         
         const fetchEmoji = async () => {
-            const url = '/api/api/emojis';
+            const url = `${import.meta.env.VITE_API_URL}/emojis`;
             setIsLoading(true);
 
             try {
@@ -34,7 +34,8 @@ export default function EmojiList({ query }) {
             } catch (error) {
                 if (!ignore) {
                     setEmojis([]);
-                    setError(error);
+                    setError(`Erreur de connexion à l'API : ${error.message}`);
+                    console.error('Détails de l\'erreur :', error);
                     setIsLoading(false);
                 }
             }
